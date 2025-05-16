@@ -1,22 +1,20 @@
 <?php
 
-$name = $_POST['name'] ?? '';
-$message = $_POST['message'] ?? '';
+require_once 'FeedbackData.php';
 
 $error = false;
 
-if ($name === '') {
-    echo '<p style="color:red">Укажите имя...</p>';
-    $error = true;
-}
+$feedbackData = FeedbackData::createFromRequest($_POST);
 
-if ($message === '') {
-    echo '<p style="color:red">Укажите ваше сообщение...</p>';
+try {
+    $feedbackData->validate();
+} catch (\InvalidArgumentException $exception) {
     $error = true;
+    echo $exception->getMessage();
 }
 
 if (!$error) {
-    echo sprintf('<p style="color:green">Спасибо %s за вашу обратную связь</p>', $name);
+    echo sprintf('<p style="color:green">Спасибо %s за вашу обратную связь</p>', $feedbackData->name);
 
     // отправка письма админу сайта о новой обратной связи
 }
