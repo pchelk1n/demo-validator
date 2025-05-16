@@ -1,19 +1,24 @@
 <?php
+declare(strict_types=1);
 
-require_once 'FeedbackData.php';
+require_once 'vendor/autoload.php';
 
-$error = false;
+use App\FeedbackData;
+use Symfony\Component\Validator\Validation;
 
 $feedbackData = FeedbackData::createFromRequest($_POST);
 
-try {
-    $feedbackData->validate();
-} catch (\InvalidArgumentException $exception) {
-    $error = true;
-    echo $exception->getMessage();
+$validator = Validation::createValidatorBuilder()
+    ->enableAttributeMapping()
+    ->getValidator();
+
+$errors = $validator->validate($feedbackData);
+
+foreach ($errors as $error) {
+    echo '<p style="color:red">', $error->getMessage(), '</p>';
 }
 
-if (!$error) {
+if ($errors->count() === 0) {
     echo sprintf('<p style="color:green">Спасибо %s за вашу обратную связь</p>', $feedbackData->name);
 
     // отправка письма админу сайта о новой обратной связи
