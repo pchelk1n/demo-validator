@@ -1,0 +1,32 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+<body>
+<h3 class="text-3xl font-bold leading-tight">Обратная связь</h3>
+<form action="app.php" method="post" class="lg:p-16 p-6">
+    <div class="relative mb-6">
+        <label class="flex  items-center mb-2 text-gray-600 text-sm font-medium">
+            Ваше имя
+        </label>
+        <input type="text" name="name" placeholder="Укажите ваше имя..." class="block w-full h-11 px-5 py-2.5 bg-white leading-7 text-base font-normal shadow-xs text-gray-900 bg-transparent border border-gray-300 rounded-full placeholder-gray-400 focus:outline-none ">
+    </div>
+    <div class="relative mb-6">
+        <label class="flex  items-center mb-2 text-gray-600 text-sm font-medium">
+            Ваше сообщение
+        </label>
+        <div class="flex">
+            <div class="relative w-full">
+                <textarea name="message" class="block w-full h-40 px-4 py-2.5 text-base leading-7 font-normal shadow-xs text-gray-900 bg-transparent border border-gray-300 rounded-2xl placeholder-gray-400 focus:outline-none resize-none" placeholder="Write a message..."></textarea>
+            </div>
+        </div>
+    </div>
+    <button type="submit" class="w-52 h-12 shadow-sm rounded-full bg-indigo-600 hover:bg-indigo-800 transition-all duration-700 text-white text-base font-semibold leading-7">
+        Отправить
+    </button>
+</form>
+</body>
+</html>
