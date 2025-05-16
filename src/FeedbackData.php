@@ -13,6 +13,9 @@ final readonly class FeedbackData
         public string $name,
         #[Assert\NotBlank(message: 'Укажите ваше сообщение...')]
         public string $message,
+        #[Assert\NotBlank(message: 'Укажите ваш email...')]
+        #[Assert\Email(message: 'Укажите корректный email...')]
+        public string $email,
     ) {}
 
     public static function createFromRequest(array $request): self
@@ -20,6 +23,7 @@ final readonly class FeedbackData
         return new self(
             name: $request['name'] ?? '',
             message: $request['message'] ?? '',
+            email: $request['email'] ?? '',
         );
     }
 }
